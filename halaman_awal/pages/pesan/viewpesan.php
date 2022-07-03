@@ -61,7 +61,7 @@ $pesananpaket = mysqli_query($koneksi, "SELECT * FROM tb_sementara LEFT JOIN tb_
                         <?php
                         $no = 1;
                         foreach ($paketterbaru as $key => $value) : ?>
-                            <div class="col-sm-6 col-lg-4">
+                            <div class="col-sm-6 col-lg-6">
                                 <div class="single_blog_item">
                                     <div class="single_blog_img">
                                         <img src="halaman_backend/assets/file/image/paket/<?= $value['gambar_paket'] ?>" alt="" style="height:180px; border-radius:10px">
@@ -71,6 +71,8 @@ $pesananpaket = mysqli_query($koneksi, "SELECT * FROM tb_sementara LEFT JOIN tb_
                                         <form action="" method="POST">
                                             <span>Rp. <?= number_format($value['harga_paket'], 0, '.', '.'); ?></span>
                                             <h3><?= $value['nama_paket']; ?></h3>
+                                            <h6 style="text-align: justify; margin-top:20px;">Kategori : <br><?= $value['kategori_paket']; ?></h6>
+                                            <h6 style="text-align: justify;">Keterangan : <?= $value['keterangan']; ?></h6>
                                             <input type="hidden" name="id_paket" value="<?= $value['id_paket'] ?>">
                                             <input type="hidden" name="harga_paket" value="<?= $value['harga_paket'] ?>">
                                             <input type="hidden" name="jumlah_beli" value="1">
@@ -176,7 +178,12 @@ $pesananpaket = mysqli_query($koneksi, "SELECT * FROM tb_sementara LEFT JOIN tb_
                                         </form>
                                     </div>
                                 </div>
-
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="alamat_antar">Alamat Antar :</label>
+                                        <textarea rows="4" class="form-control" name="alamat_antar" id="alamat_antar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Alamat Antar'" placeholder='Alamat Antar' required></textarea>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="tgl_antar">Tanggal Antar :</label>
@@ -315,7 +322,7 @@ if (isset($_POST['pesan'])) {
     $nohp = $_POST['nohp'];
     $tgl_antar = $_POST['tgl_antar'];
     $tgl_antar = date('Y-m-d', strtotime($tgl_antar));
-
+    $alamat_antar = $_POST['alamat_antar'];
     $note_order = $_POST['note_order'];
     $status_bayar = 'belum bayar';
     $status_order = 'pending';
@@ -335,7 +342,7 @@ if (isset($_POST['pesan'])) {
     // Insert Data ke tabel order
     $simpanOrder = mysqli_query(
         $koneksi,
-        "INSERT INTO tb_order (`kode_order`, `id_pelanggan`,`total_harga`,`status_bayar`, `status_order`,`nama_lengkap`,`nohp`,`tgl_antar`,`note_order`,`harga_tambahan`) VALUES ('$kode_order', '$id_pelanggan', '$total_harga','$status_bayar', '$status_order', '$nama_lengkap','$nohp', '$tgl_antar', '$note_order', NULL)"
+        "INSERT INTO tb_order (`kode_order`, `id_pelanggan`,`total_harga`,`status_bayar`, `status_order`,`nama_lengkap`,`nohp`,`tgl_antar`,`alamat_antar`,`note_order`,`harga_tambahan`) VALUES ('$kode_order', '$id_pelanggan', '$total_harga','$status_bayar', '$status_order', '$nama_lengkap','$nohp', '$tgl_antar','$alamat_antar', '$note_order', NULL)"
     );
     // Ambil id_order dari tabel order yang baru di simpan
     $id_order = $koneksi->insert_id;

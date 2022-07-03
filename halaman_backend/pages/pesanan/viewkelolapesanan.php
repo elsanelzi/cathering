@@ -49,6 +49,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="3">Aksi</th>
@@ -62,6 +63,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td>
@@ -95,6 +104,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="2">Aksi</th>
@@ -108,6 +118,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td>
@@ -134,6 +152,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="3">Aksi</th>
@@ -147,6 +166,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td colspan="3">
@@ -167,6 +194,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="3">Aksi</th>
@@ -180,6 +208,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td>
@@ -214,6 +250,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="2">Aksi</th>
@@ -227,6 +264,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td>
@@ -254,6 +299,7 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                     <th>No</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Tanggal Antar</th>
+                                                    <th>Nama Paket & Kuantitas</th>
                                                     <th>Total Harga</th>
                                                     <th>Status Order</th>
                                                     <th colspan="2">Aksi</th>
@@ -267,6 +313,14 @@ $pesanan_selesai = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $value['nama_lengkap']; ?></td>
                                                         <td><?= $value['tgl_antar']; ?></td>
+                                                        <?php
+                                                        $id_order = $value['id_order'];
+                                                        $paketdanKuantitas = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_order='$id_order' ORDER BY od.id_order_detail DESC"); ?>
+                                                        <td>
+                                                            <?php foreach ($paketdanKuantitas as $key => $value) : ?>
+                                                                <storng class="mb-10 text-info fw-bold"> <?= $value['nama_paket'] . '</strong> <br> <smal class="text-danger fw-bold">Qyt : ' . $value['jumlah_beli']; ?><br></small>
+                                                                <?php endforeach; ?>
+                                                        </td>
                                                         <td>Rp. <?= number_format($value['total_harga'] + $value['harga_tambahan'], 0, '.', '.'); ?></td>
                                                         <td style="color:red; font-weight:bold"><?= $value['status_order']; ?></td>
                                                         <td>
@@ -483,20 +537,6 @@ if (isset($_POST['selesai'])) {
                             <input type="float" name="total_bayar" id="total_bayar" value="Rp. <?= number_format($value['total_bayar'], 0, '.', '.'); ?>" class="form-control text-danger fw-bold" readonly>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nama_bank"> Nama Bank: </label>
-                                    <input type="float" name="nama_bank" id="nama_bank" value="<?= $value['nama_bank']; ?>" class="form-control text-danger fw-bold" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nomor_rekening"> No. Rekening: </label>
-                                    <input type="float" name="nomor_rekening" id="nomor_rekening" value="<?= $value['nomor_rekening']; ?>" class="form-control text-danger fw-bold" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="atas_nama"> Atas Nama: </label>
-                                    <input type="float" name="atas_nama" id="atas_nama" value="<?= $value['atas_nama']; ?>" class="form-control text-danger fw-bold" readonly>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="bukti_bayar"> Bukti Pembayaran: </label><br>

@@ -21,7 +21,6 @@ $pesanan = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_pembaya
                                             <th>Kode Order</th>
                                             <th>Nama Pelanggan</th>
                                             <th>Total Bayar</th>
-                                            <th>Bank</th>
                                             <th>Tanggal Bayar</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -35,10 +34,6 @@ $pesanan = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_pembaya
                                                 <td><?= $value['kode_order']; ?></td>
                                                 <td><?= $value['nama_lengkap']; ?></td>
                                                 <td>Rp. <?= number_format($value['total_bayar'], 0, '.', '.'); ?></td>
-                                                <td><?= $value['nama_bank']; ?> <br>
-                                                    <?= $value['nomor_rekening']; ?><br>
-                                                    Atas Nama : <?= $value['atas_nama']; ?>
-                                                </td>
                                                 <td><?= $value['tanggal_bayar']; ?></td>
                                                 <td><a href="assets/file/image/bukti bayar/<?= $value['bukti_bayar'] ?>" class="btn btn-danger" target="__blank">Bukti</a></td>
                                             </tr>

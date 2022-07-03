@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jun 2022 pada 10.21
+-- Waktu pembuatan: 01 Jul 2022 pada 00.17
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -59,6 +59,7 @@ CREATE TABLE `tb_order` (
   `nama_lengkap` varchar(100) NOT NULL,
   `nohp` varchar(15) NOT NULL,
   `tgl_antar` date NOT NULL,
+  `alamat_antar` text NOT NULL,
   `note_order` text DEFAULT NULL,
   `harga_tambahan` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -67,10 +68,8 @@ CREATE TABLE `tb_order` (
 -- Dumping data untuk tabel `tb_order`
 --
 
-INSERT INTO `tb_order` (`id_order`, `kode_order`, `id_pelanggan`, `total_harga`, `status_bayar`, `status_order`, `nama_lengkap`, `nohp`, `tgl_antar`, `note_order`, `harga_tambahan`) VALUES
-(1, '202206170001', 1, 281000, 'sudah bayar', 'selesai', 'Zahra Novita', '083161953796', '2022-06-16', 'Tambahan Telor Ceplok ya', 5000),
-(2, '202206180001', 1, 301000, 'belum bayar', 'proses', 'Zahra Novita', '083161953796', '2022-06-18', 'Telur Mata Sapi, Es Campur', 11000),
-(3, '202206180002', 2, 217000, 'sudah bayar', 'selesai', 'Juni Safitri', '081342567891', '2022-06-18', '', 0);
+INSERT INTO `tb_order` (`id_order`, `kode_order`, `id_pelanggan`, `total_harga`, `status_bayar`, `status_order`, `nama_lengkap`, `nohp`, `tgl_antar`, `alamat_antar`, `note_order`, `harga_tambahan`) VALUES
+(1, '202207010001', 1, 301000, 'sudah bayar', 'selesai', 'Zahra Novita', '083161953796', '2022-07-01', 'Limau Manis, Padang', 'Telur Dadar 1', 11000);
 
 -- --------------------------------------------------------
 
@@ -94,11 +93,7 @@ CREATE TABLE `tb_order_detail` (
 
 INSERT INTO `tb_order_detail` (`id_order_detail`, `id_order`, `id_paket`, `id_pelanggan`, `nama_paket`, `harga`, `jumlah_beli`) VALUES
 (1, 1, 2, 1, 'Paket 2', 87000, 3),
-(2, 1, 4, 1, 'Paket 3', 20000, 1),
-(3, 2, 2, 1, 'Paket 2', 87000, 3),
-(4, 2, 4, 1, 'Paket 3', 20000, 2),
-(5, 3, 2, 2, 'Paket 2', 87000, 1),
-(6, 3, 1, 2, 'Paket 1', 65000, 2);
+(2, 1, 4, 1, 'Paket 3', 20000, 2);
 
 -- --------------------------------------------------------
 
@@ -111,17 +106,18 @@ CREATE TABLE `tb_paket` (
   `nama_paket` varchar(100) NOT NULL,
   `keterangan` text NOT NULL,
   `gambar_paket` varchar(255) NOT NULL,
-  `harga_paket` double NOT NULL
+  `harga_paket` double NOT NULL,
+  `kategori_paket` varchar(124) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tb_paket`
 --
 
-INSERT INTO `tb_paket` (`id_paket`, `nama_paket`, `keterangan`, `gambar_paket`, `harga_paket`) VALUES
-(1, 'Paket 1', '<p>Paket 1 : Ayam Bumbu</p>\r\n\r\n<p>2. Ice Cream</p>\r\n', '1655368365_1654017047_ayam goreng1.jpg', 65000),
-(2, 'Paket 2', '<p>Paket 2 terdiri dari : 1. Rendang Sapi</p>\r\n\r\n<p>2. Donat</p>\r\n', '1655368891_1654008859_donat.jfif', 87000),
-(4, 'Paket 3', '<p>Nasi dan Drink</p>\r\n', '1655369311_1654017156_drinkjarkaca1.jpg', 20000);
+INSERT INTO `tb_paket` (`id_paket`, `nama_paket`, `keterangan`, `gambar_paket`, `harga_paket`, `kategori_paket`) VALUES
+(1, 'Paket 1', '<p>Paket 1 : Ayam Bumbu</p>\n\n<p>2. Rendang Sapi</p>\n', '1655368365_1654017047_ayam goreng1.jpg', 65000, 'Makanan'),
+(2, 'Paket 2', '<p>Paket 2 terdiri dari : 1. Kue Putu</p>\r\n\r\n<p>2. Donat</p>\r\n', '1655368891_1654008859_donat.jfif', 87000, 'Makanan Penutup'),
+(4, 'Paket 3', '<p>Boba</p>\r\n', '1655369311_1654017156_drinkjarkaca1.jpg', 20000, 'Minuman');
 
 -- --------------------------------------------------------
 
@@ -156,9 +152,6 @@ CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int(11) NOT NULL,
   `id_order` int(11) NOT NULL,
   `total_bayar` double NOT NULL,
-  `nama_bank` varchar(30) DEFAULT NULL,
-  `nomor_rekening` varchar(30) DEFAULT NULL,
-  `atas_nama` varchar(100) DEFAULT NULL,
   `tanggal_bayar` date NOT NULL,
   `bukti_bayar` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -167,9 +160,8 @@ CREATE TABLE `tb_pembayaran` (
 -- Dumping data untuk tabel `tb_pembayaran`
 --
 
-INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_order`, `total_bayar`, `nama_bank`, `nomor_rekening`, `atas_nama`, `tanggal_bayar`, `bukti_bayar`) VALUES
-(1, 1, 286000, 'BNI', '12345678918888', 'Zahra Novita', '2022-06-18', '1655553598_bukti.jpg'),
-(2, 3, 217000, 'BCA', '123456789188276', 'Juni Safitri', '2022-05-19', '1655573404_bukti.jpg');
+INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_order`, `total_bayar`, `tanggal_bayar`, `bukti_bayar`) VALUES
+(1, 1, 312000, '2022-07-01', '1656627223_bukti.jpg');
 
 -- --------------------------------------------------------
 
@@ -333,19 +325,19 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_order_detail`
 --
 ALTER TABLE `tb_order_detail`
-  MODIFY `id_order_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_order_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`
@@ -357,7 +349,7 @@ ALTER TABLE `tb_pelanggan`
 -- AUTO_INCREMENT untuk tabel `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pimpinan`
@@ -375,7 +367,7 @@ ALTER TABLE `tb_profil_usaha`
 -- AUTO_INCREMENT untuk tabel `tb_sementara`
 --
 ALTER TABLE `tb_sementara`
-  MODIFY `id_sementara` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_sementara` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`

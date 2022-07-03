@@ -18,6 +18,10 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket WHERE id_paket = '$id'")
                                     <label for="nama_paket">Nama Paket</label>
                                     <input type="text" class="form-control" name="nama_paket" id="nama_paket" value="<?= $paket['nama_paket'] ?>" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="kategori_paket">Kategori Paket</label>
+                                    <input type="text" class="form-control" name="kategori_paket" id="kategori_paket" value="<?= $paket['kategori_paket'] ?>" required>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
@@ -55,6 +59,7 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket WHERE id_paket = '$id'")
                     if (isset($_POST['update'])) {
                         $id_paket = $_POST['id'];
                         $nama_paket = $_POST['nama_paket'];
+                        $kategori_paket = $_POST['kategori_paket'];
                         $keterangan = $_POST['keterangan'];
                         $namagambar = $_FILES['gambar_paket']['name'];
                         $gambarlama = $_POST['gambar_paket_lama'];
@@ -66,7 +71,8 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket WHERE id_paket = '$id'")
                             $edit = $koneksi->query("UPDATE tb_paket SET 
                             nama_paket='$nama_paket' ,
                             keterangan='$keterangan',
-                            harga_paket='$harga_paket'
+                            harga_paket='$harga_paket',
+                            kategori_paket='$kategori_paket'
                             WHERE id_paket='$id_paket'");
 
                             $_SESSION['info'] = 'Berhasil Diubah';
@@ -84,7 +90,8 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket WHERE id_paket = '$id'")
                                         nama_paket='$nama_paket' ,
                                         keterangan='$keterangan',
                                         gambar_paket='$gambar',
-                                        harga_paket='$harga_paket'
+                                        harga_paket='$harga_paket',
+                                        kategori_paket='$kategori_paket'
                                         WHERE id_paket='$id_paket'");
 
                                 $_SESSION['info'] = 'Berhasil Diubah';

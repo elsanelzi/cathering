@@ -15,8 +15,9 @@ $pelanggan = mysqli_query($koneksi, "SELECT * FROM tb_pelanggan WHERE id_user='$
 // Mendapatkan id_pelanggan
 $id_pelanggan = $pelanggan['id_pelanggan'];
 
+$id_order = $_GET['id'];
 // Mendapatkan detail data order beserta data pelanggan yang melakukan order
-$menu = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_pelanggan=$id_pelanggan ORDER BY id_order_detail ASC");
+$menu = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE od.id_order=$id_order AND o.id_pelanggan=$id_pelanggan ORDER BY id_order_detail ASC");
 
 $datapelangganorder = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_pelanggan pl ON o.id_pelanggan=pl.id_pelanggan WHERE o.id_pelanggan=$id_pelanggan ORDER BY id_order ASC");
 ?>

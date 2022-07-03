@@ -23,12 +23,18 @@
                                     <button type="submit" class="btn btn-primary my-2" name="cari">Cari</button>
 
                                     <?php if (isset($_POST['cari'])) : ?>
-                                        <a href="printpaket.php?&id_paket=<?= $_POST['id_paket']; ?>" target="_blank" class="btn btn-danger mt-2 ml-1 my-2">
-                                            Print</a>
+                                        <?php if ($_POST['id_paket'] != NULL) : ?>
+                                            <a href="printpaket.php?&id_paket=<?= $_POST['id_paket']; ?>" target="_blank" class="btn btn-danger mt-2 ml-1 my-2 mr-1">
+                                                Print</a>
+                                        <?php else : ?>
+                                            <a href="printpaket1.php" target="_blank" class="btn btn-danger mt-2 ml-1 my-2 mr-1">
+                                                Print</a>
+                                        <?php endif; ?>
                                     <?php else : ?>
-                                        <a href="printpaket1.php" target="_blank" class="btn btn-danger mt-2 ml-1 my-2">
+                                        <a href="printpaket1.php" target="_blank" class="btn btn-danger mt-2 ml-1 my-2 mr-1">
                                             Print</a>
                                     <?php endif; ?>
+                                    <button type="reset" class="btn btn-warning my-2">Reset</button>
                             </form>
                             <?php
                             // Mengambil data untuk laporan penjualan paket dari gabungan tabel order, tabel order detail, dan tabel paket
@@ -37,8 +43,10 @@
                             // tombol cari ditekan
                             if (isset($_POST['cari'])) {
                                 $id_paket = $_POST['id_paket'];
-                                // Mengambil data untuk laporan penjualan paket dari gabungan tabel order, tabel order detail, dan tabel paket dimana id_paket sama dengan id paket yang dipilih
-                                $laporan_penjualan_paket = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket WHERE od.id_paket = $id_paket ORDER BY od.id_order_detail DESC");
+                                if ($id_paket != NULL) {
+                                    // Mengambil data untuk laporan penjualan paket dari gabungan tabel order, tabel order detail, dan tabel paket dimana id_paket sama dengan id paket yang dipilih
+                                    $laporan_penjualan_paket = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket WHERE od.id_paket = $id_paket ORDER BY od.id_order_detail DESC");
+                                }
                             }
 
                             ?>

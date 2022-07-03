@@ -153,6 +153,7 @@ $paketterbaru = mysqli_query($koneksi, "SELECT * FROM tb_paket ORDER BY id_paket
                                 <a href="#" class="date_item"> <span>#</span> Food News </a>
                             </div>
                             <h3><a href="blog.html"><?= $value['nama_paket']; ?></a></h3>
+                            <p class="mt-30"><?= $value['keterangan']; ?> </p>
                             <!-- <a href="#" class="btn_3">Read More <img src="halaman_awal/assets/img/icon/left_1.svg" alt=""></a> -->
                         </div>
                     </div>

@@ -16,6 +16,7 @@ if (!isset($_SESSION['level'])) {
 
 $id_paket = $_GET['id_paket'];
 $laporan_penjualan_paket = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_order_detail od ON o.id_order=od.id_order JOIN tb_paket p ON od.id_paket=p.id_paket WHERE od.id_paket = $id_paket ORDER BY od.id_order_detail DESC");
+
 ?>
 
 <!DOCTYPE html>

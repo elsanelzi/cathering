@@ -16,7 +16,7 @@ $pelanggan = mysqli_query($koneksi, "SELECT * FROM tb_pelanggan WHERE id_user='$
 $id_pelanggan = $pelanggan['id_pelanggan'];
 
 // Mendapatkan data pelanggan yang melakukan order
-$datapelangganorder = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_pelanggan p ON o.id_pelanggan=p.id_pelanggan WHERE o.id_pelanggan=$id_pelanggan ORDER BY id_order DESC LIMIT 1");
+$datapelangganorder = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN tb_pelanggan p ON o.id_pelanggan=p.id_pelanggan WHERE o.id_pelanggan=$id_pelanggan AND status_bayar != 'sudah bayar' ORDER BY id_order DESC");
 ?>
 
 <!--::header part start::-->
@@ -180,28 +180,7 @@ $datapelangganorder = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN
                         <label for="tanggal_bayar">Tanggal Pembayaran</label>
                         <input type="text" name="tanggal_bayar" class="form-control" id="tanggal_bayar" value="<?= date('d/m/Y'); ?>" readonly>
                     </div>
-                    <div class="form-group">
-                        <label for="nama_bank">Nama Bank : </label>
-                        <select name="nama_bank" id="nama_bank" class="form-control" required>
-                            <option value="">--- PILIH BANK --- </option>
-                            <option value="BNI">BNI</option>
-                            <option value="BRI">BRI</option>
-                            <option value="Mandiri">Mandiri</option>
-                            <option value="Bank Nagari">Bank Nagari</option>
-                            <option value="BCA">BCA</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
-                        <!-- <input type="text" name="nama_bank" id="nama_bank" placeholder="Masukan Nama Bank" class="form-control" required><br> -->
-                    </div>
-                    <div class="form-group">
-                        <label for="atas_nama">Atas Nama : </label>
-                        <input type="text" name="atas_nama" id="atas_nama" placeholder="Masukan Atas Nama" class="form-control" required><br>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="nomor_rekening">Nomor Rekening : </label>
-                        <input type="text" name="nomor_rekening" id="nomor_rekening" placeholder="Masukan Nomor Rekening" class="form-control" required><br>
-                    </div>
                     <div class="form-group">
                         <label for="bukti_bayar">Kirim Bukti Pembayaran : </label>
                         <input type="file" name="bukti_bayar" id="bukti_bayar" placeholder="Masukan Bukti Pembayaran" class="form-control" required><br>
@@ -226,15 +205,11 @@ $datapelangganorder = mysqli_query($koneksi, "SELECT * FROM tb_order o LEFT JOIN
                     $status_order = 'menunggu konfirmasi bayar';
 
                     // Metode Bayar Transfer
-                    $nama_bank = $_POST['nama_bank'];
-                    $nomor_rekening = $_POST['nomor_rekening'];
-                    $atas_nama = $_POST['atas_nama'];
-
                     $namafile = $_FILES['bukti_bayar']['name'];
                     $lokasifile = $_FILES['bukti_bayar']['tmp_name'];
                     $file = time() . '_' . $namafile;
                     $pindah = move_uploaded_file($lokasifile, 'halaman_backend/assets/file/image/bukti bayar/' . $file);
-                    $simpan = $koneksi->query("INSERT INTO tb_pembayaran (id_order, total_bayar, nama_bank, nomor_rekening, atas_nama, tanggal_bayar, bukti_bayar) VALUES ('$id_order', '$total_bayar', '$nama_bank','$nomor_rekening','$atas_nama','$tanggal_bayar','$file' ) ");
+                    $simpan = $koneksi->query("INSERT INTO tb_pembayaran (id_order, total_bayar, tanggal_bayar, bukti_bayar) VALUES ('$id_order', '$total_bayar', '$tanggal_bayar','$file' ) ");
 
                     $update_status = $koneksi->query("UPDATE tb_order SET status_order='$status_order' WHERE id_order='$id_order'");
 

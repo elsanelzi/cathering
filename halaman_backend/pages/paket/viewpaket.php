@@ -29,6 +29,7 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket ORDER BY nama_paket ASC"
                                         <tr class="text-center">
                                             <th>No</th>
                                             <th>Nama Paket</th>
+                                            <th>Kategori</th>
                                             <th>Gambar</th>
                                             <th>Harga</th>
                                             <th>Keterangan</th>
@@ -41,8 +42,9 @@ $paket = mysqli_query($koneksi, "SELECT * FROM tb_paket ORDER BY nama_paket ASC"
                                         foreach ($paket as $key => $value) : ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
-                                                <td><img src="assets/file/image/paket/<?= $value['gambar_paket'] ?>" alt="" width="100px" height="100px"></td>
                                                 <td><?= $value['nama_paket']; ?></td>
+                                                <td><?= $value['kategori_paket']; ?></td>
+                                                <td><img src="assets/file/image/paket/<?= $value['gambar_paket'] ?>" alt="" width="100px" height="100px"></td>
                                                 <td><?= $value['harga_paket']; ?></td>
                                                 <td><?= $value['keterangan']; ?></td>
                                                 <td class="text-center">

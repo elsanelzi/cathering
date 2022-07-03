@@ -14,6 +14,10 @@
                                 <input type="text" class="form-control" name="nama_paket" id="nama_paket" placeholder="Masukan Nama paket...." required>
                             </div>
                             <div class="form-group">
+                                <label for="kategori_paket">Kategori Paket</label>
+                                <input type="text" class="form-control" name="kategori_paket" id="kategori_paket" placeholder="Masukan Kategori paket...." required>
+                            </div>
+                            <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea name="keterangan" id="keterangan" cols="30" rows="4" class="form-control" placeholder="Masukan Keterangan paket" required></textarea>
                             </div>
@@ -47,10 +51,9 @@
 <?php
 
 if (isset($_POST['tambah'])) {
-
     $nama_paket = $_POST['nama_paket'];
+    $kategori_paket = $_POST['kategori_paket'];
     $keterangan = $_POST['keterangan'];
-
     $namagambar = $_FILES['gambar_paket']['name'];
     $lokasigambar = $_FILES['gambar_paket']['tmp_name'];
     $gambar = time() . '_' . $namagambar;
@@ -58,7 +61,7 @@ if (isset($_POST['tambah'])) {
     $harga_paket = $_POST['harga_paket'];
 
     // Menyimpan data ke dalam tabel paket
-    $simpan = mysqli_query($koneksi, "INSERT INTO tb_paket (`nama_paket`,`keterangan`,`gambar_paket`,`harga_paket` ) VALUES ('$nama_paket','$keterangan','$gambar','$harga_paket')");
+    $simpan = mysqli_query($koneksi, "INSERT INTO tb_paket (`nama_paket`,`keterangan`,`gambar_paket`,`harga_paket`,`kategori_paket` ) VALUES ('$nama_paket','$keterangan','$gambar','$harga_paket','$kategori_paket')");
 
     if ($simpan) {
         $_SESSION['info'] = 'Berhasil Disimpan';

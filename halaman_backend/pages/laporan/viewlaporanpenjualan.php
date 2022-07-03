@@ -27,12 +27,13 @@
                                     <button type="submit" class="btn btn-primary my-2" name="cari">Cari</button>
 
                                     <?php if (isset($_POST['cari'])) : ?>
-                                        <a href="print.php?&periode=<?= $_POST['periode']; ?>" target="_blank" class="btn btn-danger mt-2 ml-1 my-2">
+                                        <a href="print.php?&periode=<?= $_POST['periode']; ?>" target="_blank" class="btn btn-danger mt-2 ml-1 my-2 mr-1">
                                             Print</a>
                                     <?php else : ?>
-                                        <a href="print1.php" target="_blank" class="btn btn-danger mt-2 ml-1 my-2">
+                                        <a href="print1.php" target="_blank" class="btn btn-danger mt-2 ml-1 my-2 mr-1">
                                             Print</a>
                                     <?php endif; ?>
+                                    <button type="reset" class="btn btn-warning my-2">Reset</button>
                             </form>
                             <?php
                             // Mengambil data untuk laporan penjualan dari gabungan tabel order, tabel order detail, tabel paket, tabel pelanggan, dan tabel pembayaran
